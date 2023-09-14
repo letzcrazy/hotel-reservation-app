@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Reservation } from '../models/reservation';
-
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
 
+  private apiUrl = 'http://localhost:3000';
+
   private reservations: Reservation[] = [];
 
-
+  constructor(private http: HttpClient) { }
 
 
   // crud
-  getAllReservations(): Reservation[] {
-    return this.reservations;
+  getAllReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(this.apiUrl + '/reservations');
   }
 
   getReservation(id: string): Reservation | undefined {
