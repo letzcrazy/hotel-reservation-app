@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ReservationService {
 
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:3001';
 
   private reservations: Reservation[] = [];
 
@@ -19,8 +19,8 @@ export class ReservationService {
     return this.http.get<Reservation[]>(this.apiUrl + '/reservations');
   }
 
-  getReservation(id: string): Reservation | undefined {
-    return this.reservations.find(res => res.id === id);
+  getReservation(id: string): Observable<Reservation> {
+    return this.http.get<Reservation>(this.apiUrl + '/reservation/' + id);
   }
 
   addReservation(reservation: Reservation): void {
@@ -28,9 +28,8 @@ export class ReservationService {
     this.reservations.push(reservation);
   }
 
-  deleteReservation(id: string): void {
-    let index: number = this.reservations.findIndex(res => res.id === id);
-    this.reservations.splice(index, 1);
+  deleteReservation(id: string): Observable<void> {
+    return this.http.delete<void>(this.apiUrl + '/reservation/' + id);
   }
 
   updateReservation(id: string, updatedReservation: Reservation): void {
