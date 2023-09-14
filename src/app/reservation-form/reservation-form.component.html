@@ -19,5 +19,5 @@
     <label>Room Number</label>
     <input type="number" formControlName="roomNumber" />
   </div>
-  <button type="submit">Submit</button>
+  <button type="submit" [disabled]="reservationForm.invalid">Submit</button>
 </form>

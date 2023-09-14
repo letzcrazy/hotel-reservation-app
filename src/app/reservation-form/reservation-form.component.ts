@@ -10,10 +10,10 @@ export class ReservationFormComponent implements OnInit {
 
   reservationForm: FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder) {
+  // injecting a formBuilder into the constructor so we don't have to manually create a variable
+  constructor(private formBuilder: FormBuilder) { }
 
-  }
-
+  // add Validators to form
   ngOnInit(): void {
     this.reservationForm = this.formBuilder.group({
       checkInDate: ['', Validators.required],
