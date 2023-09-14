@@ -25,9 +25,5 @@ export class ReservationListComponent implements OnInit {
     this.reservationService.deleteReservation(id);
   }
 
-  addReservation() {
-    this.router.navigate(['/new']);
-  }
-
 
 }
